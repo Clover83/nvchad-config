@@ -17,7 +17,13 @@ local plugins =
     config = function()
         require('distant'):setup()
     end
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false
   }
 }
+
 
 return plugins
