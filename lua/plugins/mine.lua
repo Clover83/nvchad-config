@@ -1,17 +1,17 @@
-local plugins = 
+local plugins =
 {
   {
     "hadronized/hop.nvim",
     lazy = false
   },
-  
+
   {
     "ThePrimeagen/harpoon",
     lazy = true
   },
 
   {
-    'chipsenkbeil/distant.nvim', 
+    'chipsenkbeil/distant.nvim',
     lazy = false,
     branch = 'v0.3',
     config = function()
@@ -33,7 +33,34 @@ local plugins =
             -- Configuration here, or leave empty to use defaults
         })
     end
-}
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    lazy = false
+  },
+
+  {
+    'nvim-neorg/neorg',
+    ft = 'norg', -- lazy load on filetype
+    cmd = 'Neorg', -- lazy load on command, allows you to autocomplete :Neorg regardless of whether it's loaded yet
+    --  (you could also just remove both lazy loading things)
+    config = function()
+      require('neorg').setup {
+        load = {
+          ['core.defaults'] = {},
+          ['core.concealer'] = {},
+          ['core.dirman'] = {
+            config = {
+              workspaces = {
+                notes = "~/Documents/work/notes"
+              }
+            }
+          },
+        },
+      }
+    end
+  },
 }
 
 
