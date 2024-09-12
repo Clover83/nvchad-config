@@ -131,3 +131,100 @@ vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
     end
 })
 
+-- Debugging
+
+local function split_arguments(input)
+    local result = {}
+    local current = ""
+    local in_quotes = false
+
+    for i = 1, #input do
+        local char = input:sub(i, i)
+
+        if char == '"' then
+            in_quotes = not in_quotes -- toggle the in_quotes flag
+        elseif char == ' ' and not in_quotes then
+            if #current > 0 then
+                table.insert(result, current)
+                current = ""
+            end
+        else
+            current = current .. char
+        end
+    end
+
+    if #current > 0 then
+        table.insert(result, current)
+    end
+
+    return result
+end
+
+local dapui = require("dapui")
+dapui.setup()
+local dap = require("dap")
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = '/home/emilys/.vscode/extensions/ms-vscode.cpptools-1.21.6-linux-x64/debugAdapters/bin/OpenDebugAD7',
+}
+
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+    setupCommands = {
+      {
+         text = '-enable-pretty-printing',
+         description =  'enable pretty printing',
+         ignoreFailures = false
+      },
+    },
+  },
+  {
+    name = "Launch file with args",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+    setupCommands = {
+      {
+         text = '-enable-pretty-printing',
+         description =  'enable pretty printing',
+         ignoreFailures = false
+      },
+    },
+    args = function ()
+      return split_arguments(vim.fn.input('Arguments: '))
+    end
+  },
+  {
+    name = 'Attach to gdbserver :1234',
+    type = 'cppdbg',
+    request = 'launch',
+    MIMode = 'gdb',
+    miDebuggerServerAddress = 'localhost:1234',
+    miDebuggerPath = '/usr/bin/gdb',
+    cwd = '${workspaceFolder}',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    setupCommands = {
+      {
+         text = '-enable-pretty-printing',
+         description =  'enable pretty printing',
+         ignoreFailures = false
+      },
+    },
+  },
+
+}

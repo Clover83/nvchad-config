@@ -86,3 +86,23 @@ map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
 -- treesitter context (breadcrumbs)
 map('n', '<leader>sc', '<cmd>TSContextToggle<cr>', {desc='Enable breadcrumbs'})
+
+-- debugging with nvim-dap and nvim-dap-ui
+-- Automatically run dapui when dap session is up
+local dap, dapui = require("dap"), require("dapui")
+map('n', '<leader>dd', function() dapui.toggle() end, {desc="Toggle debug mode"})
+
+map('n', '<F5>', function() dap.continue() end, {desc="Debug continue"})
+map('n', '<F10>', function() dap.step_over() end, {desc="Debug step over"})
+map('n', '<F11>', function() dap.step_into() end, {desc="Debug step into"})
+map('n', '<F12>', function() dap.step_out() end, {desc="Debug step out"})
+map('n', '<Leader>db', function() dap.toggle_breakpoint() end, {desc="Toggle breakpoint"})
+map('n', '<Leader>dl', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, {desc="Set breakpoint with log"})
+map('n', '<Leader>dr', function() dap.repl.open() end, {desc="Debug open repl"})
+map('n', '<Leader>dl', function() dap.run_last() end, {desc="Debug run last"})
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+  require('dap.ui.widgets').hover()
+end, {desc="Debug hover"})
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+  require('dap.ui.widgets').preview()
+end, {desc="Debug preview"})

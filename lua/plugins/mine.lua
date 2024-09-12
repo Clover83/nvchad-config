@@ -45,6 +45,8 @@ local plugins =
     lazy = true,
   },
 
+  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+
   {
     'nvim-neorg/neorg',
     ft = 'norg', -- lazy load on filetype
