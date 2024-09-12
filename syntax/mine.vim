@@ -1,0 +1,2 @@
+highlight TreesitterContextBottom gui=underline guisp=Grey
+highlight TreesitterContextLineNumberBottom gui=underline guisp=Grey
