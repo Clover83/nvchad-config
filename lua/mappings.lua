@@ -24,7 +24,8 @@ end, { desc="Toggle LSP" })
 
 -- leap (hop replacement)
 local leap = require('leap')
-leap.create_default_mappings()
+map({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+map({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
 leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
 require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 
