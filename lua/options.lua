@@ -34,7 +34,7 @@ require'nvim-treesitter.configs'.setup {
       selection_modes = {
         ['@parameter.outer'] = 'v', -- charwise
         ['@function.outer'] = 'V', -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
+        ['@class.outer'] = 'V', -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is
       -- extended to include preceding or succeeding whitespace. Succeeding
@@ -168,6 +168,7 @@ dap.adapters.cppdbg = {
   type = 'executable',
   command = '/home/emilys/.vscode/extensions/ms-vscode.cpptools-1.21.6-linux-x64/debugAdapters/bin/OpenDebugAD7',
 }
+require("dap-python").setup("python")
 
 dap.configurations.cpp = {
   {

@@ -5,6 +5,8 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
+map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- mine
