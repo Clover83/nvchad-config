@@ -1,7 +1,7 @@
 local plugins =
 {
   {
-    "hadronized/hop.nvim",
+    "ggandor/leap.nvim",
     lazy = false
   },
 

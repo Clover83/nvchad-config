@@ -21,17 +21,12 @@ map('n', '<leader>st', function ()
   end
 end, { desc="Toggle LSP" })
 
--- hop (easymotions)
-local hop = require('hop')
-hop.setup()
 
-map('', '<leader><leader>s', function()
-	hop.hint_char1()
-end, {remap=true, desc="hop char1"})
-
-map('', '<leader><leader>w', function()
-	hop.hint_words()
-end, {remap=true, desc="hop words"})
+-- leap (hop replacement)
+local leap = require('leap')
+leap.create_default_mappings()
+leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
+require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 
 -- harpoon
 local harp_m = require('harpoon.mark')
