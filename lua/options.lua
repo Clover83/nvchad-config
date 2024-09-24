@@ -124,6 +124,11 @@ require'treesitter-context'.setup{
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching 
 }
 
+require'eyeliner'.setup {
+  highlight_on_key = true,
+  dim = true,
+}
+
 vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
     pattern = "*",
     callback = function()
