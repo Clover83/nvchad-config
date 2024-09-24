@@ -28,6 +28,8 @@ map({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
 map({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
 leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
 require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+leap.opts.preview_filter = function () return false end
+-- vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
 
 -- harpoon
 local harp_m = require('harpoon.mark')
