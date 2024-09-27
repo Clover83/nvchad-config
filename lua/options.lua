@@ -268,3 +268,9 @@ dap.configurations.python = {
         justMyCode = true,
     },
 }
+
+require("telescope").load_extension "pomodori"
+
+vim.keymap.set("n", "<leader>pm", function()
+  require("telescope").extensions.pomodori.timers()
+end, { desc = "Manage Pomodori Timers"})
