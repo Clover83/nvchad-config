@@ -3,6 +3,12 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local delete = vim.keymap.del
+
+-- set up buffer navigation
+delete('n', '<tab>')
+delete('n', '<leader>fb')
+map('n', 'fb', '<cmd>Telescope buffers sort_mru=true<CR>')
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
@@ -51,8 +57,21 @@ map('', '<leader><leader>p', function()
   harp_u.nav_prev()
 end, {desc='harpoon next mark'})
 
+vim.keymap.set('', '<leader><leader>1', function()
+  harp_u.nav_file(1)
+end, { desc = 'Harpoon to file 1' })
+vim.keymap.set('', '<leader><leader>2', function()
+  harp_u.nav_file(2)
+end, { desc = 'Harpoon to file 2' })
+vim.keymap.set('', '<leader><leader>3', function()
+  harp_u.nav_file(3)
+end, { desc = 'Harpoon to file 3' })
+vim.keymap.set('', '<leader><leader>4', function()
+  harp_u.nav_file(4)
+end, { desc = 'Harpoon to file 4' })
+
 require('telescope').load_extension('harpoon')
-map('', '<leader>fp', '<cmd>Telescope harpoon marks<cr>',
+map('', '<leader><leader>t', '<cmd>Telescope harpoon marks<cr>',
   {desc='Telescope harpoon marks'})
 
 map('', '<leader>sf', '<cmd>Telescope lsp_document_symbols symbols=method,function<cr>',

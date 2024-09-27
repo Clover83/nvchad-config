@@ -22,7 +22,9 @@ require'nvim-treesitter.configs'.setup {
         -- nvim_buf_set_keymap) which plugins like which-key display
         ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
         -- You can also use captures from other query groups like `locals.scm`
-        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+        ["al"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+        ["ad"] = { query = "@conditional.outer", desc = "Around conditional"},
+        ["id"] = { query = "@conditional.inner", desc = "Inside conditional"},
       },
       -- You can choose the select mode (default is charwise 'v')
       --
@@ -35,6 +37,8 @@ require'nvim-treesitter.configs'.setup {
         ['@parameter.outer'] = 'v', -- charwise
         ['@function.outer'] = 'V', -- linewise
         ['@class.outer'] = 'V', -- blockwise
+        ['@conditional.outer'] = 'v',
+        ['@conditional.inner'] = 'v',
       },
       -- If you set this to `true` (default is `false`) then any textobject is
       -- extended to include preceding or succeeding whitespace. Succeeding
@@ -71,7 +75,7 @@ require'nvim-treesitter.configs'.setup {
         --
         -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
         -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-        ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+        ["]l"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
         ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
       },
       goto_next_end = {
@@ -233,4 +237,34 @@ dap.configurations.cpp = {
     },
   },
 
+}
+
+dap.adapters.python = {
+    type = 'executable';
+    command = "python";
+    args = { '-m', 'debugpy.adapter' };
+}
+
+dap.configurations.python = {
+    {
+        name = 'Python: Remote Attach',
+        type = 'python',
+        request = 'attach',
+        connect = {
+            host = 'localhost',
+            port = 4444,
+        },
+        cwd = vim.fn.getcwd(),
+        pathMappings = {
+            {
+                localRoot = function()
+                    return vim.fn.input("Local code folder > ", vim.fn.getcwd(), "file")
+                end,
+                remoteRoot = function()
+                    return vim.fn.input("Container code folder > ", "/", "file")
+                end,
+            },
+        },
+        justMyCode = true,
+    },
 }
