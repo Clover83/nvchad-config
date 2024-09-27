@@ -177,7 +177,12 @@ dap.adapters.cppdbg = {
   type = 'executable',
   command = '/home/emilys/.vscode/extensions/ms-vscode.cpptools-1.21.6-linux-x64/debugAdapters/bin/OpenDebugAD7',
 }
-require("dap-python").setup("python")
+
+dap.adapters.python = {
+    type = 'executable';
+    command = "/usr/local/python-3.7.4-static/bin/python3";
+    args = { '-m', 'debugpy.adapter' };
+}
 
 dap.configurations.cpp = {
   {
@@ -205,7 +210,7 @@ dap.configurations.cpp = {
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    stopAtEntry = true,
+    stopAtEntry = false,
     setupCommands = {
       {
          text = '-enable-pretty-printing',
@@ -239,33 +244,42 @@ dap.configurations.cpp = {
 
 }
 
-dap.adapters.python = {
-    type = 'executable';
-    command = "python";
-    args = { '-m', 'debugpy.adapter' };
-}
 
 dap.configurations.python = {
     {
-        name = 'Python: Remote Attach',
-        type = 'python',
-        request = 'attach',
-        connect = {
-            host = 'localhost',
-            port = 4444,
-        },
-        cwd = vim.fn.getcwd(),
-        pathMappings = {
-            {
-                localRoot = function()
-                    return vim.fn.input("Local code folder > ", vim.fn.getcwd(), "file")
-                end,
-                remoteRoot = function()
-                    return vim.fn.input("Container code folder > ", "/", "file")
-                end,
-            },
-        },
-        justMyCode = true,
+      name = 'Python: Remote Attach',
+      type = 'python',
+      request = 'attach',
+      connect = {
+          host = 'localhost',
+          port = 4444,
+      },
+      cwd = vim.fn.getcwd(),
+      pathMappings = {
+          {
+              localRoot = function()
+                  return vim.fn.input("Local code folder > ", vim.fn.getcwd(), "file")
+              end,
+              remoteRoot = function()
+                  return vim.fn.input("Container code folder > ", "/", "file")
+              end,
+          },
+      },
+      justMyCode = true,
+    },
+    {
+      name = "Launch file with args",
+      type = "python",
+      -- python = "/usr/local/python-3.7.4-static/bin/python3",
+      request = "launch",
+      cwd = '${workspaceFolder}',
+      program = function()
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      end,
+      stopAtEntry = true,
+      args = function ()
+        return split_arguments(vim.fn.input('Arguments: '))
+      end
     },
 }
 
