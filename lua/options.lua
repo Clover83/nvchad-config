@@ -283,6 +283,17 @@ dap.configurations.python = {
     },
 }
 
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      n = {
+        ["d"] = require("telescope.actions").delete_buffer,
+        ["q"] = require("telescope.actions").close,
+      }
+    }
+  }
+})
+
 require("telescope").load_extension "pomodori"
 
 vim.keymap.set("n", "<leader>pm", function()

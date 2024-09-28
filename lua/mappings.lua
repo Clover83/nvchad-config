@@ -8,7 +8,7 @@ local delete = vim.keymap.del
 -- set up buffer navigation
 delete('n', '<tab>')
 delete('n', '<leader>fb')
-map('n', 'fb', '<cmd>Telescope buffers sort_mru=true<CR>')
+map('n', 'fb', '<cmd>Telescope buffers sort_mru=true initial_mode=normal<CR>')
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
