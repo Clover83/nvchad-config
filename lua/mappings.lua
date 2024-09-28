@@ -8,7 +8,12 @@ local delete = vim.keymap.del
 -- set up buffer navigation
 delete('n', '<tab>')
 delete('n', '<leader>fb')
-map('n', 'fb', '<cmd>Telescope buffers sort_mru=true initial_mode=normal<CR>')
+delete('n', '<leader>x')
+map('n', '<leader>fb', '<cmd>Telescope buffers sort_mru=true initial_mode=normal<CR>')
+
+map('n', '<leader>tt', function ()
+    require('base46').toggle_transparency()
+end, { desc = "Toggle transparency "})
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
