@@ -11,15 +11,6 @@ local plugins =
   },
 
   {
-    'chipsenkbeil/distant.nvim',
-    lazy = false,
-    branch = 'v0.3',
-    config = function()
-        require('distant'):setup()
-    end
-  },
-
-  {
     "christoomey/vim-tmux-navigator",
     lazy = false
   },
@@ -119,6 +110,11 @@ local plugins =
       },
     }
   },
+
+  {
+    "chrisgrieser/nvim-scissors",
+    lazy = true
+  }
 }
 
 
