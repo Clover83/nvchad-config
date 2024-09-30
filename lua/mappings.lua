@@ -127,9 +127,22 @@ map('n', '<Leader>dl', function() dap.run_last() end, {desc="Debug run last"})
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
 end, {desc="Debug hover"})
-vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+vim.keymap.set({'n', 'v'}, '<Leader>dv', function()
   require('dap.ui.widgets').preview()
 end, {desc="Debug preview"})
+
+
+-- python dap
+local dappy = require('dap-python')
+map('x', '<leader>dps', function()
+  dappy.debug_selection()
+end, { desc="Debug python selection" })
+map('n', '<leader>dpc', function()
+  dappy.test_class()
+end, { desc="Debug python class" })
+map('n', '<leader>dpf', function()
+  dappy.test_function()
+end, { desc="Debug python function" })
 
 -- pomo.nvim
 map('n', '<leader>pp', '<cmd>TimerSession pomodoro<CR>')
