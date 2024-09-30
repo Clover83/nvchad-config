@@ -42,42 +42,88 @@ require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 leap.opts.preview_filter = function () return false end
 -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
 
--- harpoon
-local harp_m = require('harpoon.mark')
-local harp_u = require('harpoon.ui')
+-- harpoon & yeet
+local harp = require('harpoon')
+local yeet = require('yeet')
+harp:setup({
+  yeet = {
+    select = function(list_item, _, _)
+      require('yeet').execute(list_item.value)
+    end
+  }
+})
+map('n', '<leader>ym', function()
+  harp.ui:toggle_quick_menu(harp:list("yeet"))
+end, { desc="Open yeet harpoon menu"})
 
+map('n', '<leader>yt', function ()
+  yeet.select_target()
+end, { desc="Select yeet target"})
+
+map('n', '<leader>ya', function ()
+  yeet.toggle_post_write()
+end, { desc="Toggle autocommand on write"})
+
+-- Doubletap \ to yeet
+map('n', '\\\\', function ()
+  yeet.execute()
+end, { desc="Yeet"})
+
+-- Run command without clearing term
+map('n', '<leader>\\', function ()
+  require("yeet").execute(nil, { clear_before_yeet = false, interrupt_before_yeet = true })
+end, { desc="Yeet without clearing"})
+
+-- Harpoon
 map('n', '<leader><leader>a', function()
-  harp_m.add_file()
+  harp:list():add()
 end, {desc="harpoon add mark"})
 
 map('n', '<leader><leader>m', function()
-  harp_u.toggle_quick_menu()
+  harp.ui:toggle_quick_menu(harp:list())
 end, {desc="harpoon show marks"})
 
 map('', '<leader><leader>n', function()
-  harp_u.nav_next()
+  harp:list():next()
 end, {desc='harpoon next mark'})
 
 map('', '<leader><leader>p', function()
-  harp_u.nav_prev()
-end, {desc='harpoon next mark'})
+  harp:list():prev()
+end, {desc='harpoon prev mark'})
 
 vim.keymap.set('', '<leader><leader>x', function()
-  harp_u.nav_file(1)
+  harp:list():select(1)
 end, { desc = 'Harpoon to file 1' })
 vim.keymap.set('', '<leader><leader>c', function()
-  harp_u.nav_file(2)
+  harp:list():select(2)
 end, { desc = 'Harpoon to file 2' })
 vim.keymap.set('', '<leader><leader>d', function()
-  harp_u.nav_file(3)
+  harp:list():select(3)
 end, { desc = 'Harpoon to file 3' })
 vim.keymap.set('', '<leader><leader>r', function()
-  harp_u.nav_file(4)
+  harp:list():select(4)
 end, { desc = 'Harpoon to file 4' })
 
-require('telescope').load_extension('harpoon')
-map('', '<leader><leader>t', '<cmd>Telescope harpoon marks<cr>',
-  {desc='Telescope harpoon marks'})
+-- telescope
+local tel_conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = tel_conf.file_previewer({}),
+        sorter = tel_conf.generic_sorter({}),
+    }):find()
+end
+
+vim.keymap.set("n", "<leader><leader>t", function() toggle_telescope(harp:list()) end,
+    { desc = "Open harpoon window" })
 
 map('', '<leader>sf', '<cmd>Telescope lsp_document_symbols symbols=method,function<cr>',
   {desc='Telescope list methods/functions'})

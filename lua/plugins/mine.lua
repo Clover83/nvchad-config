@@ -6,11 +6,6 @@ local plugins =
   },
 
   {
-    "ThePrimeagen/harpoon",
-    lazy = true
-  },
-
-  {
     "christoomey/vim-tmux-navigator",
     lazy = false
   },
@@ -114,7 +109,25 @@ local plugins =
   {
     "chrisgrieser/nvim-scissors",
     lazy = true
-  }
+  },
+
+  {
+    "samharju/yeet.nvim",
+    dependencies = {
+        "stevearc/dressing.nvim", -- optional, provides sane UX
+    },
+    version = "*", -- use the latest release, remove for master
+    cmd = "Yeet",
+    opts = {},
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    lazy = true,
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim", "samharju/yeet.nvim" }
+  },
+
 }
 
 
