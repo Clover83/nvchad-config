@@ -19,28 +19,16 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
 map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
--- mine
--- map('n', '<leader>st', function ()
---   local active_clients = vim.lsp.get_clients()
---   if next(active_clients) == nil then
---     vim.cmd('LspStart')
---     print('LSP Started')
---   else
---     vim.cmd('LspStop')
---     print('LSP Stopped')
---   end
--- end, { desc="Toggle LSP" })
 
 local diagnostics_active = true
-vim.keymap.set('n', '<leader>st', function()
+map('n', '<leader>st', function()
   diagnostics_active = not diagnostics_active
   if diagnostics_active then
     vim.diagnostic.show()
   else
     vim.diagnostic.hide()
   end
-end)
+end, { desc ="Toggle diagnostics" })
 
 
 
