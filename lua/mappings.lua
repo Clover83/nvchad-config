@@ -9,7 +9,7 @@ local delete = vim.keymap.del
 delete('n', '<tab>')
 delete('n', '<leader>fb')
 delete('n', '<leader>x')
-map('n', '<leader>fb', '<cmd>Telescope buffers sort_mru=true initial_mode=normal<CR>')
+map('n', '<leader>fb', '<cmd>Telescope buffers sort_mru=true<CR>')
 
 map('n', '<leader>tt', function ()
     require('base46').toggle_transparency()
