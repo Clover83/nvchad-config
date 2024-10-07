@@ -270,7 +270,7 @@ dap.configurations.python = {
     {
       name = "Launch file with args",
       type = "python",
-      -- python = "/usr/local/python-3.7.4-static/bin/python3",
+      python = "/usr/local/python-3.7.4-static/bin/python3",
       request = "launch",
       cwd = '${workspaceFolder}',
       program = function()
@@ -303,3 +303,7 @@ end, { desc = "Manage Pomodori Timers"})
 require("notify").setup({
   background_colour = "#1a1b26",
 })
+
+require("luasnip.loaders.from_vscode").lazy_load {
+	paths = { vim.fn.stdpath("config") .. "/snippets" },
+}

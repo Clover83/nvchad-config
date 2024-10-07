@@ -1,0 +1,1 @@
+{"def __in":{"body":["def __init_(self):","  $1"],"prefix":"init"},"futimp":{"prefix":"futimp","body":"from __future__ import print_function, division, absolute_import, unicode_literals"}}

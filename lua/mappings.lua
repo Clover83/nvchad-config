@@ -21,16 +21,27 @@ map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- mine
-map('n', '<leader>st', function ()
-  local active_clients = vim.lsp.get_clients()
-  if next(active_clients) == nil then
-    vim.cmd('LspStart')
-    print('LSP Started')
+-- map('n', '<leader>st', function ()
+--   local active_clients = vim.lsp.get_clients()
+--   if next(active_clients) == nil then
+--     vim.cmd('LspStart')
+--     print('LSP Started')
+--   else
+--     vim.cmd('LspStop')
+--     print('LSP Stopped')
+--   end
+-- end, { desc="Toggle LSP" })
+
+local diagnostics_active = true
+vim.keymap.set('n', '<leader>st', function()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
   else
-    vim.cmd('LspStop')
-    print('LSP Stopped')
+    vim.diagnostic.hide()
   end
-end, { desc="Toggle LSP" })
+end)
+
 
 
 -- leap (hop replacement)
@@ -198,3 +209,7 @@ map('n', '<leader>ps', '<cmd>TimerShow<CR>')
 map('n', '<leader>ph', '<cmd>TimerHide<CR>')
 map('n', '<leader>pE', '<cmd>TimerStop<CR>')
 
+-- scissors snippets
+vim.keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end)
+-- when used in visual mode, prefills the selection as snippet body
+vim.keymap.set({ "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end)
