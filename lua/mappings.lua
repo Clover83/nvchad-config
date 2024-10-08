@@ -19,17 +19,25 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
 map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
 
-map('n', '<leader>st', function()
-  local temp = vim.g.diagnostics_active
-  temp = not temp
-  vim.g.diagnostics_active = temp
-  if temp then
-    vim.diagnostic.show()
-  else
-    vim.diagnostic.hide()
-  end
-end, { desc ="Toggle diagnostics" })
-
+map('n', '<leader>st', function (global)
+	local vars, bufnr, cmd
+	if global then
+		vars = vim.g
+		bufnr = nil
+	else
+		vars = vim.b
+		bufnr = 0
+	end
+	vars.diagnostics_disabled = not vars.diagnostics_disabled
+	if vars.diagnostics_disabled then
+		cmd = 'disable'
+		vim.api.nvim_echo({ { 'Disabled diagnostics' } }, false, {})
+	else
+		cmd = 'enable'
+		vim.api.nvim_echo({ { 'Enabled diagnostics' } }, false, {})
+	end
+	vim.schedule(function() vim.diagnostic[cmd](bufnr) end)
+end)
 
 
 -- leap (hop replacement)
