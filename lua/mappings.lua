@@ -19,11 +19,11 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
 map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
 
-
-local diagnostics_active = true
 map('n', '<leader>st', function()
-  diagnostics_active = not diagnostics_active
-  if diagnostics_active then
+  local temp = vim.g.diagnostics_active
+  temp = not temp
+  vim.g.diagnostics_active = temp
+  if temp then
     vim.diagnostic.show()
   else
     vim.diagnostic.hide()
