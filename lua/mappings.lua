@@ -209,3 +209,9 @@ map('n', '<leader>pE', '<cmd>TimerStop<CR>')
 vim.keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end)
 -- when used in visual mode, prefills the selection as snippet body
 vim.keymap.set({ "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end)
+
+-- substitute 
+map("n", "<leader>x", require('substitute').operator, { noremap = true })
+map("n", "<leader>xx", require('substitute').line, { noremap = true })
+map("n", "<leader>X", require('substitute').eol, { noremap = true })
+map("x", "<leader>x", require('substitute').visual, { noremap = true })
