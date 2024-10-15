@@ -134,6 +134,13 @@ local plugins =
         -- refer to the configuration section below
     }
   },
+
+  {
+  "karb94/neoscroll.nvim",
+  config = function ()
+    require('neoscroll').setup({})
+  end
+  },
 }
 
 

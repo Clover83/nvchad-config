@@ -235,3 +235,20 @@ map("x", "X", require('substitute.exchange').visual,
   { noremap = true, desc = "exchange"})
 map("n", "sxc", require('substitute.exchange').cancel,
   { noremap = true, desc = "cancel exchange"})
+
+-- smooth scrolling with neoscroll
+local neoscroll = require('neoscroll')
+local keymap = {
+  ["<C-u>"] = function() neoscroll.ctrl_u({ duration = 150 }) end;
+  ["<C-d>"] = function() neoscroll.ctrl_d({ duration = 150 }) end;
+  ["<C-b>"] = function() neoscroll.ctrl_b({ duration = 250 }) end;
+  ["<C-f>"] = function() neoscroll.ctrl_f({ duration = 250 }) end;
+  ["<C-y>"] = function() neoscroll.scroll(-0.1, { move_cursor=false; duration = 100 }) end;
+  ["<C-e>"] = function() neoscroll.scroll(0.1, { move_cursor=false; duration = 100 }) end;
+  ["<PageUp>"] = function() neoscroll.ctrl_b({ duration = 250 }) end;
+  ["<PageDown>"] = function() neoscroll.ctrl_f({ duration = 250 }) end;
+}
+local modes = { 'n', 'v', 'x' }
+for key, func in pairs(keymap) do
+  map(modes, key, func)
+end
