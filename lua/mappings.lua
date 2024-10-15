@@ -42,8 +42,8 @@ end)
 
 -- leap (hop replacement)
 local leap = require('leap')
-map({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
-map({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+map({'n', 'x', 'o'}, '-',  '<Plug>(leap-forward)')
+map({'n', 'x', 'o'}, '_',  '<Plug>(leap-backward)')
 leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
 require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 leap.opts.preview_filter = function () return false end
@@ -211,7 +211,27 @@ vim.keymap.set("n", "<leader>se", function() require("scissors").editSnippet() e
 vim.keymap.set({ "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end)
 
 -- substitute 
-map("n", "<leader>x", require('substitute').operator, { noremap = true })
-map("n", "<leader>xx", require('substitute').line, { noremap = true })
-map("n", "<leader>X", require('substitute').eol, { noremap = true })
-map("x", "<leader>x", require('substitute').visual, { noremap = true })
+map("n", "s", require('substitute').operator,
+  { noremap = true, desc = "substitute"} )
+map("n", "ss", require('substitute').line,
+  { noremap = true, desc = "substitute line"})
+map("n", "S", require('substitute').eol,
+  { noremap = true, desc = "substitute eol"})
+map("x", "s", require('substitute').visual,
+  { noremap = true, desc = "substitute"})
+
+map("n", "<leader>S", require('substitute.range').operator,
+  { noremap = true, desc = "substitute range"})
+map("x", "<leader>S", require('substitute.range').visual,
+  { noremap = true, desc = "substitute range"})
+map("n", "<leader>SS", require('substitute.range').word,
+  { noremap = true, desc = "substitute range word"})
+
+map("n", "sx", require('substitute.exchange').operator,
+  { noremap = true, desc = "exchange"})
+map("n", "sxx", require('substitute.exchange').line,
+  { noremap = true, desc = "exchange line"})
+map("x", "X", require('substitute.exchange').visual,
+  { noremap = true, desc = "exchange"})
+map("n", "sxc", require('substitute.exchange').cancel,
+  { noremap = true, desc = "cancel exchange"})
