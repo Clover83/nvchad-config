@@ -135,6 +135,9 @@ vim.keymap.set("n", "<leader><leader>t", function() toggle_telescope(harp:list()
 map('', '<leader>sf', '<cmd>Telescope lsp_document_symbols symbols=method,function<cr>',
   {desc='Telescope list methods/functions'})
 
+map('', '<leader>sr', '<cmd>Telescope lsp_references<cr>',
+  {desc='Telescope list references'})
+
 -- tmux navigator
 
 map('', '<C-Left>', '<cmd>TmuxNavigateLeft<cr>', {remap=true, desc="Tmux window left"})
