@@ -37,7 +37,7 @@ map('n', '<leader>st', function (global)
 		vim.api.nvim_echo({ { 'Enabled diagnostics' } }, false, {})
 	end
 	vim.schedule(function() vim.diagnostic[cmd](bufnr) end)
-end)
+end, { desc = "Toggle diagnostics" })
 
 
 -- leap (hop replacement)
@@ -206,9 +206,9 @@ map('n', '<leader>ph', '<cmd>TimerHide<CR>')
 map('n', '<leader>pE', '<cmd>TimerStop<CR>')
 
 -- scissors snippets
-vim.keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end)
+vim.keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end, { desc = "Edit snippets"})
 -- when used in visual mode, prefills the selection as snippet body
-vim.keymap.set({ "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end)
+vim.keymap.set({ "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end, { desc = "Add snippet"})
 
 -- substitute 
 map("n", "s", require('substitute').operator,
