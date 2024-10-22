@@ -18,8 +18,11 @@ end, { desc = "Toggle transparency "})
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
 map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
+
+-- quick fix commands
 map("n", "<leader>fn", ":cn<cr>",{ desc = "Quickfix next" , noremap = true})
 map("n", "<leader>fp", ":cp<cr>",{ desc = "Quickfix previous" , noremap = true})
+map("n", "<leader>fc", ":cc <cr>",{ desc = "Quickfix current" , noremap = true})
 
 map('n', '<leader>st', function (global)
 	local vars, bufnr, cmd
