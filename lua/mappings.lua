@@ -18,6 +18,8 @@ end, { desc = "Toggle transparency "})
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>ww", "<cmd>set wrap!<cr>",{ desc = "Toggle wrap" })
 map("v", ".", ":normal .<cr>",{ desc = "Repeat over lines" , noremap = true})
+map("n", "<leader>fn", ":cn<cr>",{ desc = "Quickfix next" , noremap = true})
+map("n", "<leader>fp", ":cp<cr>",{ desc = "Quickfix previous" , noremap = true})
 
 map('n', '<leader>st', function (global)
 	local vars, bufnr, cmd
@@ -45,7 +47,7 @@ local leap = require('leap')
 map({'n', 'x', 'o'}, '-',  '<Plug>(leap-forward)')
 map({'n', 'x', 'o'}, '_',  '<Plug>(leap-backward)')
 leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
-require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+-- require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 leap.opts.preview_filter = function () return false end
 -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
 
