@@ -260,3 +260,7 @@ local modes = { 'n', 'v', 'x' }
 for key, func in pairs(keymap) do
   map(modes, key, func)
 end
+
+-- oil
+
+vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
