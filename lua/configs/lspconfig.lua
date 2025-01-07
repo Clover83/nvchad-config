@@ -1,10 +1,11 @@
+-- require('java').setup() -- needs to be called before lsbconfig
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "clangd"}
+local servers = { "html", "cssls", "clangd", "rust_analyzer"}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -22,7 +23,6 @@ end
 --   on_init = nvlsp.on_init,
 --   capabilities = nvlsp.capabilities,
 -- }
-
 
 
 lspconfig.pylsp.setup {

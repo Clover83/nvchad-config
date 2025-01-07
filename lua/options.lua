@@ -6,6 +6,7 @@ require "nvchad.options"
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "nu" },
   textobjects = {
     select = {
       enable = true,

@@ -174,7 +174,17 @@ local plugins =
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
-  }
+  },
+
+  {
+    'LhKipp/nvim-nu',
+    build = ':TSInstall nu',
+    opts = {}
+  },
+
+  -- {
+  --   'nvim-java/nvim-java'
+  -- }
 }
 
 
