@@ -1,4 +1,3 @@
--- require('java').setup() -- needs to be called before lsbconfig
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
