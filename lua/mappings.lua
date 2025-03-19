@@ -262,5 +262,12 @@ for key, func in pairs(keymap) do
 end
 
 -- oil
+map("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+-- Git
+map("n", "<leader>gb", "<CMD>Gitsigns toggle_current_line_blame<CR>",
+  { desc = "Toggle line blame" })
+map("n", "<leader>gB", "<CMD>Gitsigns blame_line<CR>",
+  { desc = "Detailed line blame" })
+map("n", "<leader>gA", "<CMD>Gitsigns blame<CR>",
+  { desc = "Show blame annotation" })
