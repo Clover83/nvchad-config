@@ -303,3 +303,7 @@ require("notify").setup({
 require("luasnip.loaders.from_vscode").lazy_load {
 	paths = { vim.fn.stdpath("config") .. "/snippets" },
 }
+
+require('render-markdown').setup({
+  completions = { lsp = { enabled = true } },
+})
