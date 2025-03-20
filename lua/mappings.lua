@@ -271,3 +271,14 @@ map("n", "<leader>gB", "<CMD>Gitsigns blame_line<CR>",
   { desc = "Detailed line blame" })
 map("n", "<leader>gA", "<CMD>Gitsigns blame<CR>",
   { desc = "Show blame annotation" })
+
+-- todo
+map("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+map("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+map("n", "<leader>td", "<CMD>TodoTelescope<CR>")

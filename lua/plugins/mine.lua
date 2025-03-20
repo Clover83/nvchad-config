@@ -189,8 +189,17 @@ local plugins =
       ---@module 'render-markdown'
       ---@type render.md.UserConfig
       opts = {},
-  }
+  },
 
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- blank for default config
+    },
+    lazy = true,
+    cmd = { "TodoTelescope" },
+  }
   -- {
   --   "nvim-java/nvim-java",
   --   lazy = false,
