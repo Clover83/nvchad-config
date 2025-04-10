@@ -1,5 +1,4 @@
 require "nvchad.options"
-
 -- add yours here!
 
 -- local o = vim.o
@@ -134,6 +133,15 @@ vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
     callback = function()
         vim.cmd('set syntax=mine')
     end
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      require('oil').open(vim.fn.argv(0))
+    else
+    end
+  end
 })
 
 -- Debugging
