@@ -235,15 +235,22 @@ dap.configurations.cpp = {
     miDebuggerPath = '/usr/bin/gdb',
     cwd = '${workspaceFolder}',
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input('Path to executable : ', vim.fn.getcwd() .. '/', 'file')
     end,
-    setupCommands = {
-      {
-         text = '-enable-pretty-printing',
-         description =  'enable pretty printing',
-         ignoreFailures = false
-      },
-    },
+    setupCommands = function ()
+      return {
+        {
+          text = '-enable-pretty-printing',
+          description =  'enable pretty printing',
+          ignoreFailures = false
+        },
+        {
+          text = 'set substitute-path ' .. vim.fn.input('Path to container Source: ') .. ' ' .. vim.fn.input('Path to host Source: ', vim.fn.getcwd() .. '/', 'file'),
+          description = 'Map container paths to host',
+          ignoreFailures = false
+        }
+      }
+    end
   },
 
 }
