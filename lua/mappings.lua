@@ -282,3 +282,9 @@ map("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 map("n", "<leader>td", "<CMD>TodoTelescope<CR>")
+ 
+-- Snacks' Lazyvim integration
+local snacks = require('snacks')
+map('n', '<leader>G', function()
+    snacks.lazygit.open()
+end, { desc = 'Lazyvim'})
