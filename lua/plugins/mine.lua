@@ -224,7 +224,10 @@ local plugins =
       words = { enabled = false },
       lazygit = { enabled = true },
     },
- }
+   },
+  {
+    "Clover83/definer.nvim"
+  }
   -- {
   --   "nvim-java/nvim-java",
   --   lazy = false,

@@ -288,3 +288,14 @@ local snacks = require('snacks')
 map('n', '<leader>G', function()
     snacks.lazygit.open()
 end, { desc = 'Lazyvim'})
+
+
+-- my custom keyval thing
+require("definer").setup({
+  definitions_file = "/home/emilys/.config/nvim/lua/definitions.json"
+})
+
+-- Optional keybind
+vim.keymap.set("n", "<C-k>", ":DefinerPopup<CR>", { desc = "Show definer popup" })
+vim.keymap.set("n", "<leader>tv", ":DefinerReload<CR>", { desc = "Reload translation file" })
+vim.keymap.set("n", "<leader>ta", ":DefinerAdd<CR>", { desc = "Add translation" })
