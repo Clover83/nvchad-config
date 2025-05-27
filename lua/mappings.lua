@@ -228,12 +228,12 @@ map("n", "S", require('substitute').eol,
 map("x", "s", require('substitute').visual,
   { noremap = true, desc = "substitute"})
 
-map("n", "<leader>S", require('substitute.range').operator,
-  { noremap = true, desc = "substitute range"})
-map("x", "<leader>S", require('substitute.range').visual,
-  { noremap = true, desc = "substitute range"})
-map("n", "<leader>SS", require('substitute.range').word,
-  { noremap = true, desc = "substitute range word"})
+-- map("n", "<leader>S", require('substitute.range').operator,
+--   { noremap = true, desc = "substitute range"})
+-- map("x", "<leader>S", require('substitute.range').visual,
+--   { noremap = true, desc = "substitute range"})
+-- map("n", "<leader>SS", require('substitute.range').word,
+--   { noremap = true, desc = "substitute range word"})
 
 map("n", "sx", require('substitute.exchange').operator,
   { noremap = true, desc = "exchange"})
@@ -282,9 +282,13 @@ map("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 map("n", "<leader>td", "<CMD>TodoTelescope<CR>")
- 
+
 -- Snacks' Lazyvim integration
 local snacks = require('snacks')
+map('n', '<leader>S', function()
+    snacks.scratch()
+end, { desc = 'Scratchpad'})
+-- Snacks scratchpad
 map('n', '<leader>G', function()
     snacks.lazygit.open()
 end, { desc = 'Lazyvim'})

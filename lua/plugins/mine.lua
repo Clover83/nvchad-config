@@ -223,6 +223,7 @@ local plugins =
       statuscolumn = { enabled = false },
       words = { enabled = false },
       lazygit = { enabled = true },
+      scratch = { enabled = true },
     },
    },
   {
